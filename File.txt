@@ -1,62 +1,130 @@
 
 11/01/2020
 
-Select Clause with Where clause 
+select Clause with where clause 
 
 1) Display details of jobs where the minimum salary is greater than 10000.
 		select job_id from employees where salary > 10000;
 2) Display the first name and join date of the employees who joined between 2002 and 2005.
-		
+		select   first_name,
+               hire_date 
+              from employees
+             where hire_date between ‘2002-01-01’ and ‘2005-01-01’;
+
 
 3) Display first name and join date of the employees who is either IT Programmer or Sales Man.
+select first_name,
+                   hire_date 
+                  from employees 
+                 where job_id   in ('IT_PROG','SA_MAN');
 
 4) Display first name, salary, commission pct, and hire date for employees with salary less than 10000.
 	select first name, salary, commission_pct,hire date from employees where salary > 10000;
+ select first_name,salary,commission_pct,hire_date 
+                from employees 
+                 where salary<10000;
 
 5) Display job Title, the difference between minimum and maximum salaries for jobs with max salary in the range 10000 to 20000.
+select job_title,max_salary,min_salary, max_salary-min_salary AS Difference 
+                 from jobs 
+                 where max_salary between 10000 and 20000 ;
 
 6) Display employees where the first name or last name starts with S.
+select  first_name,
+             last_name  
+             from employees 
+            where first_name like ‘s%’ or last_name like ‘s%’;
 
 7) Display details of jobs in the descending order of the title.
+Mysql> select * from jobs order by job_title desc;
 
 8) Display employees who joined in the month of May.
+Mysql> select  first_name,hire_date from employees where hire_date like ’%-05-%’;
 
 9) Display details of the employees where commission percentage is null and salary in the range 5000 to 10000 and department is 30.
+select * from employees
+              where commission_pct is null
+             and salary between 5000 and 10000 and department_id=30;
 
-Join 
+join 
 
 1). Display job title, employee ID, number of days between ending date and starting date for all jobs in department 30 from job history.
+select job_title,employee_id,
+              end_date-start_date AS Date_difference 
+                from jobs j 
+                join job_history jh 
+                       ON j.job_id=jh.job_id where department_id=30;
 
 
 2) Display department name and manager first name.
+select   dept.department_name, 
+            e.first_name AS Manager
+            from employees e 
+            join departments dept
+                        ON e.manager_id=dept.manager_id;
 
 3) Display department name, manager name, and city.
-
+select department_name
+               first_name AS Manager,
+               city
+              from employees e 
+               join departments dept 
+                      ON e.manager_id=dept.manager_id
+                join locations loc 
+                         ON dept.location_id=loc.location_id ;
 
 4) Display country name, city, and department name.
 
+select country_name,
+              city,
+              department_name 
+              from countries c 
+               join locations loc 
+                     USING(Country_id)
+               join departments dept  USING (location_id);
+
+
 5) Display employee name and country in which he is working.
+select first_name,
+              country_name 
+              from employees
+              join departments USING (department_id)
+              join locations USING (location_id) 
+              join countries USING (country_id);
+
 
 Functions 
 
 1. Display employees who joined in the month of May.
+select first_name,
+              hire_date from employees 
+             where date_format(hire_date,'%m')='05';
 
 2. Display first name, salary, and round the salary to thousands.
-
+select first_name,salary ,round(salary,-3) from employees;
 3. Display first name and date of first salary of the employees.
-
+		select employee_id, first_name, hire_date,  
+                       LAST_DAY (hire_date)
+                       From   employees;
 4. Display first name and experience of the employees.
+select first_name, SYSDATE(), hire_date, DATEDIFF( SYSDATE(), hire_date )/365 
+              AS Experience FROM employees;
+           
 
 5. Display the length of first name for employees where last name contain character ‘b’ after 3rd position.
+select first_name, LENGTH (FIRST_NAME) as length, LAST_NAME FROM EMPLOYEES         
+                  where last_name like '___b%';
+
 
 6. Display first name in upper case and email address in lower case for employees where the first name and email address are same irrespective of the case.
-
+select UPPER(first_name), LOWER(email) from employees 
+                 where upper(first_name)=upper(email);
 7. Display employees who joined in the current year.
-
+select * from employees  where hire_date= '2021-01-01';
 8. Display the number of days between system date and 1st January 1995.
-
+select datediff(sysdate(),'1995-01-01');
 9. Display how many employees joined in each month of the current year.
-
+select count(first_name) as number_of_employees, month(hire_date) as Months from employees where year(hire_date)=2021 order by month(hire_date);
 MySQL Aggregate function 
 
 1. Display employee ID and the date on which he ended his previous job.
