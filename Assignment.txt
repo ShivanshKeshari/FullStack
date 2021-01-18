@@ -1,2 +1,2 @@
 Java Assignment Done.
-Sql is going on.
+Sql is DDL,DML AND sub query are left
