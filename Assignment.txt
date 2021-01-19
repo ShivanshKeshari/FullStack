@@ -1,2 +1,3 @@
 Java Assignment Done.
-Sql is DDL,DML AND sub query are left
+MySql sub query are left
+Java Mini Project is ongoing
