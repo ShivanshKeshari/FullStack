@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<script>
+    function validateForm() {
+  var x = document.forms["login"]["username"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+  var y = document.forms["login"]["password"].value;
+  if (y == "") {
+    alert("Password must be filled out");
+    return false;
+  }
+  var z = document.forms["login"]["user"].value;
+  if (z == "") {
+    alert("Users must be filled out");
+    return false;
+  }
+}
+</script>
+<body>
+    <div class="container">
+        <form name="login" action="" method="POST" onsubmit="return validateForm()">
+            <label for="">Username </label>
+            <input type="text" name="username" id="username"><br>
+            <label for="">Password </label>
+            <input type="password" name="password" id="password"><br>
+            <label for="">Your User Role </label>
+            <input type="radio" name="user" id="customer" value="customer">Customer
+
+            <input type="radio" name="user" id="salesperson" value="Salesperson">SalesPerson<br>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset"><br>
+            <a href="register.html">Sign Up Page</a>
+        </form>
+    </div>
+</body>
+
+</html>

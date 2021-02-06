@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up page</title>
+</head>
+<script>
+    function validateForm() {
+  var x = document.forms["register"]["firstname"].value;
+  if (x == "") {
+    alert("First Name must be filled out");
+    return false;
+  }
+  var y = document.forms["register"]["gender"].value;
+  if (y == "") {
+    alert("gender must be filled out");
+    return false;
+  }
+  var z = document.forms["register"]["username"].value;
+  if (z == "") {
+    alert("Username must be filled out");
+    return false;
+  }
+  var p = document.forms["register"]["npassword"].value;
+  if (z == "") {
+    alert("Password must be filled out");
+    return false;
+  }
+  var q = document.forms["register"]["cpassword"].value;
+  if (z == "") {
+    alert("Password must be filled out");
+    return false;
+  }
+  var r = document.forms["register"]["age"].value;
+  if (z <= "21" || z=="" ) {
+    alert("Age must be filled out and age should be above 21");
+    return false;
+  }
+  var s = document.forms["register"]["phonenumber"].value;
+  if (s.length != 10 || z=="" ) {
+    alert("Use Correct Phone Number");
+    return false;
+  }
+}
+</script>
+<body>
+
+    <div class="container">
+        <form name="register" action="" method="POST" onsubmit="return validateForm()">
+
+            <label for="">First Name</label>
+            <input type="text" name="firstname" id="firstname"> <br>
+            <label for="">Gender</label>
+            <input type="radio" name="gender" id="male">Male
+            <input type="radio" name="gender" id="female">Female <br>
+            <label for="">Age </label>
+            <input type="number" name="age" id="age"><br>
+            <label for="">Phone Number </label>
+            <input type="number" name="phonenumber" id="phonenumber"><br>
+            <label for="">User Name</label>
+            <input type="text" name="username" id="username"><br>
+            <label for="">New Password</label>
+            <input type="password" name="npassword" id="npasssword"><br>
+            <label for="">Confirm Password</label>
+            <input type="password" name="cpassword" id="cpasssword"><br>
+            <input type="submit" value="submit">
+            <input type="reset" value="reset">
+            <a href="index.html">Login Page</a>
+
+
+        </form>
+    </div>
+
+</body>
+
+</html>
